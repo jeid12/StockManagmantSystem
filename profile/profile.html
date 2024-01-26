@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Your Profile</title>
     <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="Fontawesome/css/bootstrap.min.css">
     <link rel="stylesheet" href="Fontawesome/css/all.min.css">
 </head>
 <body>
@@ -13,20 +14,36 @@
             <div class="row mt-5">
                 <div class="col-lg-4 bg-white m-auto">
                     <h2 class="text-center pt-3"> Create Your Profile</h2>
-                    <p class="text-center text-muted lead">dhga</p>
+                    <p class="text-center text-muted lead">Personalize your Account</p>
 
                     <!-- form start -->
                     <form action="#">
-                        <div class="input-group">
-
-                            <span class="input-group-text mb-3"><i class="fa fa-user"></i></span>
-                            <input type="text" class="form-control" placeholder="First Name">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fa fa-user" ></i></span>
+                            <input type="text" class="form-control" placeholder="First Name" id="FirstName">
                         </div>
-                        <div class="input-group">
-
-                            <span class="input-group-text mb-3"><i class="fa fa-user"></i></span>
-                            <input type="text" class="form-control" placeholder="Last Name">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text "><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Last Name" id="LastName">
                         </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text "><i class="fa-solid fa-address-card"></i></span>
+                            <input type="text" class="form-control" placeholder="National ID/Passport" id="SSID">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text "><i class="fa-solid fa-pen-to-square"></i></span>
+                            <input type="text" class="form-control" placeholder="TIN number" id="TIN">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text "><i class="fa-solid fa-phone-volume"></i></span>
+                            <input type="text" class="form-control" placeholder="Phone Number" id="phone">
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="button" class="btn btn-success">Save</button>
+                          
+                        </div>
+                      
                     </form>
                 </div>
             </div>
