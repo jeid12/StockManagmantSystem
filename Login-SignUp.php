@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = mysqli_real_escape_string($conn, $password);
 
         // Query to check user credentials
-        $sql = "SELECT * FROM registeraccount WHERE UserName='$username' AND Password1='$password'";
+        $sql = "SELECT * FROM registeraccount WHERE UserName='$username' ";
         $result = $conn->query($sql);
 
         if ($result === false) {
@@ -36,8 +36,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Authentication successful
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $username;
+                if (password_verify($password, $hashedPassword)){
                 header("Location: welcome.php"); // Redirect to welcome page
                 exit;
+            }
             } else {
                 echo "Invalid username or password";
             }

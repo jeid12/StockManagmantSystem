@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["sign-submit"])) {
     } else {
         // Prepare and bind SQL statement
         $stmt = $conn->prepare("INSERT INTO registeraccount (UserName, Email, Password1) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $username, $email,  $password);
+        $stmt->bind_param("sss", $username, $email,  $hashedPassword);
         
         if ($stmt->execute()) {
             ?>
