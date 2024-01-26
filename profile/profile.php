@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="d-grid">
-                            <button type="button" name="submit" class="btn btn-success">Save</button>
+                            <button type="submit" name="submit" class="btn btn-success">Save</button>
 
                         </div>
 
