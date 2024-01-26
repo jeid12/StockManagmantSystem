@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2024 at 11:00 AM
+-- Generation Time: Jan 26, 2024 at 12:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -30,7 +30,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `product_information` (
   `Product_ID` varchar(20) NOT NULL,
   `Product_Name` varchar(30) NOT NULL,
-  `Price_per_unit` double NOT NULL,
   `Category` varchar(30) NOT NULL,
   `Address` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -53,11 +52,12 @@ CREATE TABLE `product_location` (
 --
 
 CREATE TABLE `purchase_information` (
+  `Transaction_ID` varchar(20) NOT NULL,
   `Product_ID` varchar(20) NOT NULL,
   `Quantity` double NOT NULL,
   `Price_per_unit` double NOT NULL,
   `Total_Amount` double NOT NULL,
-  `Date_Of_Purchase` date NOT NULL,
+  `Date_Of_Purchase` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Supplier_Name` varchar(25) NOT NULL,
   `Location_Name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -69,13 +69,32 @@ CREATE TABLE `purchase_information` (
 --
 
 CREATE TABLE `sales_information` (
+  `Transaction_ID` varchar(20) NOT NULL,
   `Product_ID` varchar(20) NOT NULL,
   `Quantity` double NOT NULL,
   `Price_per_unit` double NOT NULL,
   `Total_Amount` double NOT NULL,
-  `Date_Of_Sales` date NOT NULL,
+  `Date_Of_Sales` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Client_Name` varchar(25) NOT NULL,
   `Location_Name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaction_information`
+--
+
+CREATE TABLE `transaction_information` (
+  `Transaction_ID` varchar(20) NOT NULL,
+  `TIN_number` varchar(20) NOT NULL,
+  `Product_ID` varchar(20) NOT NULL,
+  `Price_per_unit` double NOT NULL,
+  `Quantity` double NOT NULL,
+  `Date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `Type` enum('purchase','sales') NOT NULL,
+  `Address` varchar(20) NOT NULL,
+  `Supplier/Client` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -116,14 +135,25 @@ ALTER TABLE `product_location`
 --
 ALTER TABLE `purchase_information`
   ADD KEY `	Foreign key` (`Product_ID`),
-  ADD KEY `	Address Foreign key` (`Location_Name`);
+  ADD KEY `	Address Foreign key` (`Location_Name`),
+  ADD KEY `transaction_id foreign key` (`Transaction_ID`);
 
 --
 -- Indexes for table `sales_information`
 --
 ALTER TABLE `sales_information`
   ADD KEY `Address Foreign key` (`Location_Name`),
-  ADD KEY `Product Foreign key` (`Product_ID`);
+  ADD KEY `Product Foreign key` (`Product_ID`),
+  ADD KEY `transaction_id1 foreign key` (`Transaction_ID`);
+
+--
+-- Indexes for table `transaction_information`
+--
+ALTER TABLE `transaction_information`
+  ADD PRIMARY KEY (`Transaction_ID`),
+  ADD KEY `Product_name foreign key` (`Product_ID`),
+  ADD KEY `Location_address foreign key` (`Address`),
+  ADD KEY `Tin_number foreign key` (`TIN_number`);
 
 --
 -- Indexes for table `useraccount`
@@ -147,14 +177,24 @@ ALTER TABLE `product_information`
 --
 ALTER TABLE `purchase_information`
   ADD CONSTRAINT `	Address Foreign key` FOREIGN KEY (`Location_Name`) REFERENCES `product_location` (`Exact_Address`),
-  ADD CONSTRAINT `	Foreign key` FOREIGN KEY (`Product_ID`) REFERENCES `product_information` (`Product_ID`);
+  ADD CONSTRAINT `	Foreign key` FOREIGN KEY (`Product_ID`) REFERENCES `product_information` (`Product_ID`),
+  ADD CONSTRAINT `transaction_id foreign key` FOREIGN KEY (`Transaction_ID`) REFERENCES `transaction_information` (`Transaction_ID`);
 
 --
 -- Constraints for table `sales_information`
 --
 ALTER TABLE `sales_information`
   ADD CONSTRAINT `Address Foreign key` FOREIGN KEY (`Location_Name`) REFERENCES `product_location` (`Exact_Address`),
-  ADD CONSTRAINT `Product Foreign key` FOREIGN KEY (`Product_ID`) REFERENCES `product_information` (`Product_ID`);
+  ADD CONSTRAINT `Product Foreign key` FOREIGN KEY (`Product_ID`) REFERENCES `product_information` (`Product_ID`),
+  ADD CONSTRAINT `transaction_id1 foreign key` FOREIGN KEY (`Transaction_ID`) REFERENCES `transaction_information` (`Transaction_ID`);
+
+--
+-- Constraints for table `transaction_information`
+--
+ALTER TABLE `transaction_information`
+  ADD CONSTRAINT `Location_address foreign key` FOREIGN KEY (`Address`) REFERENCES `product_location` (`Exact_Address`),
+  ADD CONSTRAINT `Product_name foreign key` FOREIGN KEY (`Product_ID`) REFERENCES `product_information` (`Product_ID`),
+  ADD CONSTRAINT `Tin_number foreign key` FOREIGN KEY (`TIN_number`) REFERENCES `useraccount` (`TIN_number`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
