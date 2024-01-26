@@ -14,54 +14,33 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['login-submit'])) {
+        $username = $_POST['Lusername'];
+        $password = $_POST['Lpassword'];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login-submit"])) {
-    $username = $_POST["Lusername"];
-    $password = $_POST["Lpassword"];
+        // Sanitize user input to prevent SQL Injection
+        $username = mysqli_real_escape_string($conn, $username);
+        $password = mysqli_real_escape_string($conn, $password);
 
-    // Prepare SQL statement to retrieve hashed password from the database based on the username
-    $stmt = $conn->prepare("SELECT Password1 FROM registeraccount WHERE UserName = ?");
-    if (!$stmt) {
-        die("Error preparing statement: " . $conn->error);
-    }
+        // Query to check user credentials
+        $sql = "SELECT * FROM registeraccount WHERE UserName='$username' AND Password1='$password'";
+        $result = $conn->query($sql);
 
-    // Bind parameters
-    $stmt->bind_param("s", $username);
-
-    // Execute the statement
-    if (!$stmt->execute()) {
-        die("Error executing statement: " . $stmt->error);
-    }
-
-    // Get result
-    $result = $stmt->get_result();
-
-    if ($result->num_rows == 1) {
-        // Fetch the hashed password from the result set
-        $row = $result->fetch_assoc();
-        $hashedPassword = $row['password'];
-
-        // Verify the password
-        if (password_verify($password, $hashedPassword)) {
-            // Password is correct, set up session and redirect to desired page
-            $_SESSION["username"] = $username;
-            // Redirect to dashboard or any other page after successful login
-            header("Location: dashboard.php");
-            echo 'successfully';
-            exit();
+        if ($result === false) {
+            // Query failed, display error message
+            echo "Query failed: " . $conn->error;
         } else {
-            // Password is incorrect
-            $error = "Invalid username or password";
+            // Check if any row was returned
+            if ($result->num_rows == 1) {
+                // Authentication successful
+                $_SESSION['loggedin'] = true;
+                $_SESSION['username'] = $username;
+                header("Location: welcome.php"); // Redirect to welcome page
+                exit;
+            } else {
+                echo "Invalid username or password";
+            }
         }
-    } else {
-        // Username not found
-        $error = "Invalid username or password";
     }
-
-    // Close statement
-    $stmt->close();
-}
-
-// Close connection
-$conn->close();
-?>
+}$conn->close();
