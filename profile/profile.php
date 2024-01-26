@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="profile.css">
     <link rel="stylesheet" href="Fontawesome/css/bootstrap.min.css">
     <link rel="stylesheet" href="Fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="Fontawesome/css/profile.css">
 </head>
 
 <body>
     <div class="bg-light">
         <div class="container">
             <div class="row mt-5">
-                <div class="col-lg-4 bg-white m-auto">
+                <div class="col-lg-4 bg-white m-auto rounded-top wrapper">
                     <h2 class="text-center pt-3"> Create Your Profile</h2>
                     <p class="text-center text-muted lead">Personalize your Account</p>
 
@@ -45,11 +46,16 @@
 
                         <div class="d-grid">
 <<<<<<< HEAD
+<<<<<<< HEAD
                             <button type="submit" name="submit" class="btn btn-success">Save</button>
 =======
                             <!-- <button type="button" name="submit" class="btn btn-success">Save</button> -->
                             <input type="submit" name="submit" class="btn btn-success" value="Save">
 >>>>>>> 1eaab13502257cff2b18f64798c07addd35c1f6d
+=======
+                            <button type="submit" name="submit" class="btn btn-success">Save</button>
+        
+>>>>>>> 99f7f7d1c13397099b34e163f4f3c43bd58bdc9d
 
                         </div>
 
