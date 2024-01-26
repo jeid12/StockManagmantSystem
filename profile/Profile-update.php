@@ -25,17 +25,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         echo "Error: All fields are required";
     } else {
         // Prepare and bind SQL statement
-        $stmt = $conn->prepare("INSERT INTO registeraccount (UserName, Email, Password1) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $username, $email,  $hashedPassword);
+        $stmt = $conn->prepare("INSERT INTO `useraccount`(`TIN_number`, `User_SSID`, `First_Name`, `Last_Name`, `Phone_Number`) VALUES (?,?,?,?,?)");
+        $stmt->bind_param("sssss",$tin, $id,$FirstName, $LastName,$Phone);
         
         if ($stmt->execute()) {
             ?>
 <script>
 alert("registration done successfully!");
 </script>
-<?php header("Location: ./login.php"); ?>
+<?php header("Location: ./welcome.php"); ?>
 <?php }
- else { echo "Access to login table denied!" ; } // Close statement $stmt->close();
+ else { echo "Access to login table denied!" ; } // Close statement 
+ $stmt->close();
     }
     }
     $conn->close();
