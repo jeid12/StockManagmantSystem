@@ -44,7 +44,12 @@
                         </div>
 
                         <div class="d-grid">
+<<<<<<< HEAD
                             <button type="submit" name="submit" class="btn btn-success">Save</button>
+=======
+                            <!-- <button type="button" name="submit" class="btn btn-success">Save</button> -->
+                            <input type="submit" name="submit" class="btn btn-success" value="Save">
+>>>>>>> 1eaab13502257cff2b18f64798c07addd35c1f6d
 
                         </div>
 
