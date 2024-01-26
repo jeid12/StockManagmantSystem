@@ -11,6 +11,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["sign-submit"])) {
     $username = $_POST["Rusername"];
     $email = $_POST["Remail"];
@@ -18,21 +19,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["sign-submit"])) {
 
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    // statement
-    if (empty( empty($username) ||  empty($password)) || empty($email)) {
-        echo  "Error: All fields are required?";
-       }else{
-        $query1="INSERT INTO `registeraccount`(`UserName`, `Email`, `password`) VALUES ($username,$email,$password)";
-        if ($conn->query($query1) === TRUE){
-            echo "added also to login table successful!";
-         }else{
-            echo "Acess to login table dinied!";
-         }
-       }
-       
-   
-
-    // Close statement
-    $stmt->close();
-}
-?>
+    
+    if (empty($username) || empty($password) || empty($email)) {
+        echo "Error: All fields are required";
+    } else {
+        // Prepare and bind SQL statement
+        $stmt = $conn->prepare("INSERT INTO registeraccount (UserName, Email, Password1) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $username, $email, $hashedPassword);
+        
+        if ($stmt->execute()) {
+            ?>
+<script>
+alert("registration done successfully!");
+</script>
+<?php header("Location: ./login.php"); ?>
+<?php }
+ else { echo "Access to login table denied!" ; } // Close statement $stmt->close();
+    }
+    }
+    $conn->close();
+    ?>
