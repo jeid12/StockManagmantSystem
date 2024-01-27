@@ -32,32 +32,32 @@
                 </a>
             </li>
             <li>
-                <a href="Available Products.html">
+                <a href="Available Products.php">
                     <i class="fas fa-cubes"></i>
                     <span>Available Products</span>
                 </a>
             </li>
             <li>
-                <a href="Purchases.html">
+                <a href="Purchases.php">
                     <i class="fas fa-sign-in-alt"></i>
                     <span>Purchases</span>
                 </a>
             </li>
             <li>
-                <a href="Sales.html">
+                <a href="Sales.php">
                     <i class="fas fa-shopping-cart"></i>
                     <span>Sales</span>
                 </a>
             </li>
             <li>
-                <a href="Statement.html">
+                <a href="Statement.php">
                     <i class="fas fa-chart-bar"></i>
                     <span>Statement</span>
                 </a>
             </li>
 
             <li class="logout">
-                <a href="#">
+                <a href="../Login.php">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                 </a>

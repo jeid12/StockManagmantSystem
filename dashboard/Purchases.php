@@ -26,13 +26,13 @@
         </div>
         <ul class="menu">
             <li class="active">
-                <a href="dashboard index.html">
+                <a href="dashboard index.php">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="Available Products.html">
+                <a href="Available Products.php">
                     <i class="fas fa-cubes"></i>
                     <span>Available Products</span>
                 </a>
@@ -44,20 +44,20 @@
                 </a>
             </li>
             <li>
-                <a href="Sales.html">
+                <a href="Sales.php">
                     <i class="fas fa-shopping-cart"></i>
                     <span>Sales</span>
                 </a>
             </li>
             <li>
-                <a href="Statement.html">
+                <a href="Statement.php">
                     <i class="fas fa-chart-bar"></i>
                     <span>Statement</span>
                 </a>
             </li>
 
             <li class="logout">
-                <a href="#">
+                <a href="../Login.php">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                 </a>
@@ -101,7 +101,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        $sql = "SELECT * FROM useraccount"; // Replace 'your_table' with your actual table name
+                        $sql = "SELECT * FROM purchase_information"; // Replace 'your_table' with your actual table name
                         $result = $conn->query($sql);
                         
                         // Step 3: Fetch the data from the query result
@@ -109,11 +109,11 @@
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
                                 echo "<tr>";
-                                echo "<td>".$row["TIN_number"]."</td>";
-                                echo "<td>".$row["User_SSID"]."</td>";
-                                echo "<td>".$row["First_Name"]."</td>";
-                                echo "<td>".$row["Last_Name"]."</td>";
-                                echo "<td>".$row["Phone_Number"]."</td>";
+                                echo "<td>".$row["Product_ID"]."</td>";
+                                echo "<td>".$row["Quantity"]."</td>";
+                                echo "<td>".$row["Price_per_unit"]."</td>";
+                                echo "<td>".$row["Total_Amount"]."</td>";
+                                echo "<td>".$row["Location_Name"]."</td>";
                                 echo "<td>"."Delivered"."</td>";
                                 echo "<td><button>Edit</button>
                                 <button>Delete</button> </td>";

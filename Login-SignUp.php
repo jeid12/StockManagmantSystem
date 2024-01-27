@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $username;
                 if (password_verify($password, $hashedPassword)){
-                header("Location: welcome.php"); // Redirect to welcome page
+                header("Location: ./dashboard/dashboard index.php"); // Redirect to welcome page
                 exit;
             }
             } else {
