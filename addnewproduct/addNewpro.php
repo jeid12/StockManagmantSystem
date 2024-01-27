@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 <script>
 alert("registration done successfully!");
 </script>
-<?php header("Location: ./welcome.php"); ?>
+<?php header("Location: ../dashboard/dashboard index.php"); ?>
 <?php }
  else { echo "Access to login table denied!" ; } // Close statement 
  $stmt->close();
