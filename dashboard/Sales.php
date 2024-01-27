@@ -88,13 +88,13 @@
                     <thead>
                         <tr>
 
-                            <th>Product Type</th>
+                            <th>Product Id</th>
                             <th>Product Name</th>
                             <th>Category</th>
                             <th>Location</th>
                             <th>Price /Unit</th>
                             <th>Status</th>
-                            <th>Action</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -107,14 +107,13 @@
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
                                 echo "<tr>";
-                                echo "<td>".$row["Product_ID "]."</td>";
+                                echo "<td>".$row["Product_ID"]."</td>";
                                 echo "<td>".$row["Quantity"]."</td>";
                                 echo "<td>".$row["Price_per_unit"]."</td>";
                                 echo "<td>".$row["Total_Amount"]."</td>";
                                 echo "<td>".$row["Client_Name"]."</td>";
                                 echo "<td>"."Delivered"."</td>";
-                                echo "<td><button>Edit</button>
-                                <button>Delete</button> </td>";
+                               
                                 echo "</tr>";
                             }
                         } else {

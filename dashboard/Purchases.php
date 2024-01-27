@@ -96,7 +96,7 @@
                             <th>Location</th>
                             <th>Price /Unit</th>
                             <th>Status</th>
-                            <th>Action</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -115,8 +115,7 @@
                                 echo "<td>".$row["Total_Amount"]."</td>";
                                 echo "<td>".$row["Location_Name"]."</td>";
                                 echo "<td>"."Delivered"."</td>";
-                                echo "<td><button>Edit</button>
-                                <button>Delete</button> </td>";
+                              
                                 echo "</tr>";
                             }
                         } else {
