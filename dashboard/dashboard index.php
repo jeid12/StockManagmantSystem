@@ -122,135 +122,50 @@
                     <thead>
                         <tr>
 
-                            <th>Product Type</th>
+
                             <th>Product Name</th>
                             <th>Category</th>
                             <th>Location</th>
                             <th>Price /Unit</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>Quantity</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                Laptop
-                            </td>
-                            <td>Lenovo </td>
-                            <td>Thinkpad i7</td>
-                            <td>A002</td>
-                            <td>$340</td>
-                            <td>Decent</td>
-                            <td>
-                                <button>Edit</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                Laptop
-                            </td>
-                            <td>Lenovo </td>
-                            <td>i7</td>
-                            <td>A003</td>
-                            <td>$240</td>
-                            <td>Decent</td>
-                            <td>
-                                <button>Edit</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                Laptop
-                            </td>
-                            <td>HP</td>
-                            <td>i7</td>
-                            <td>A001</td>
-                            <td>$220</td>
-                            <td>Decent</td>
-                            <td>
-                                <button>Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Laptop
-                            </td>
-                            <td>HP</td>
-                            <td>i7</td>
-                            <td>A001</td>
-                            <td>$220</td>
-                            <td>Decent</td>
-                            <td>
-                                <button>Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Laptop
-                            </td>
-                            <td>HP</td>
-                            <td>i7</td>
-                            <td>A001</td>
-                            <td>$220</td>
-                            <td>Decent</td>
-                            <td>
-                                <button>Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Laptop
-                            </td>
-                            <td>HP</td>
-                            <td>i7</td>
-                            <td>A001</td>
-                            <td>$220</td>
-                            <td>Decent</td>
-                            <td>
-                                <button>Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Laptop
-                            </td>
-                            <td>HP</td>
-                            <td>i7</td>
-                            <td>A001</td>
-                            <td>$220</td>
-                            <td>Decent</td>
-                            <td>
-                                <button>Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Laptop
-                            </td>
-                            <td>HP</td>
-                            <td>i7</td>
-                            <td>A001</td>
-                            <td>$220</td>
-                            <td>Decent</td>
-                            <td>
-                                <button>Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Laptop
-                            </td>
-                            <td>HP</td>
-                            <td>i7</td>
-                            <td>A001</td>
-                            <td>$220</td>
-                            <td>Decent</td>
-                            <td>
-                                <button>Edit</button>
-                            </td>
-                        </tr>
+                        <?php
+                        $sql = "SELECT * FROM purchase_information";
+                        $sql1 = "SELECT * FROM sales_information";
+                        $sql2 = "SELECT * FROM product_information";
+                         // Replace 'your_table' with your actual table name
+                        $result = $conn->query($sql);
+                        $result1 = $conn->query($sql1);
+                        $result2 = $conn->query($sql2);
+                        $Q =0;
+                        if ($result1->num_rows > 0||$result->num_rows){
+                            $row1 = $result1->fetch_assoc();
+                            $row2 = $result->fetch_assoc();
+                            $Q = $row2["Quantity"]-$row1["Quantity"];
+                        }
+                        
+                        // Step 3: Fetch the data from the query result
+                        if ($result2->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result2->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>".$row["Product_Name"]."</td>";
+                                echo "<td>".$row["Category"]."</td>";
+                                echo "<td>".$row["Address"]."</td>";
+                                echo "<td>".$row["Price_per_unit"]."</td>";
+                                
+                                echo "<td>".$Q."</td>";
+                                
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "0 results";
+                        }
+                        
+                     ?>
                     </tbody>
                     <tfoot>
                         <tr>
